@@ -35,6 +35,7 @@ VENDOR_APPS = [
     'rest_framework',
     'django_dramatiq',
     'django_dbconn_retry',
+    'corsheaders',
 ]
 
 if production_env:
@@ -57,6 +58,7 @@ INSTALLED_APPS = VENDOR_APPS + LOCAL_APPS
 
 MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -187,8 +189,16 @@ REST_FRAMEWORK = {
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.JSONRenderer',
     )
 }
+
+# django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_URLS_REGEX = r"^/api/.*$"
+
+# https://docs.djangoproject.com/en/4.0/ref/settings/#csrf-trusted-origins
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8080']
 
 REDIS_URL = "redis://%s:%s" % (REDIS_CONF["host"], REDIS_CONF["port"])
 

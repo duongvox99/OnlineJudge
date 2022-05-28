@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser
 from django.conf import settings
 from django.db import models
-from utils.models import JSONField
+
 
 
 class AdminType(object):
@@ -36,7 +36,7 @@ class User(AbstractBaseUser):
     auth_token = models.TextField(null=True)
     two_factor_auth = models.BooleanField(default=False)
     tfa_token = models.TextField(null=True)
-    session_keys = JSONField(default=list)
+    session_keys = models.JSONField(default=list)
     # open api key
     open_api = models.BooleanField(default=False)
     open_api_appkey = models.TextField(null=True)
@@ -83,9 +83,9 @@ class UserProfile(models.Model):
     #         }
     #     }
     # }
-    acm_problems_status = JSONField(default=dict)
+    acm_problems_status = models.JSONField(default=dict)
     # like acm_problems_status, merely add "score" field
-    oi_problems_status = JSONField(default=dict)
+    oi_problems_status = models.JSONField(default=dict)
 
     real_name = models.TextField(null=True)
     avatar = models.TextField(default=f"{settings.AVATAR_URI_PREFIX}/default.png")

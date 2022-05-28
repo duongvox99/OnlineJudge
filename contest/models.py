@@ -1,7 +1,7 @@
 from utils.constants import ContestRuleType  # noqa
 from django.db import models
 from django.utils.timezone import now
-from utils.models import JSONField
+
 
 from utils.constants import ContestStatus, ContestType
 from account.models import User
@@ -23,7 +23,7 @@ class Contest(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     # 是否可见 false的话相当于删除
     visible = models.BooleanField(default=True)
-    allowed_ip_ranges = JSONField(default=list)
+    allowed_ip_ranges = models.JSONField(default=list)
 
     @property
     def status(self):
@@ -70,7 +70,7 @@ class ACMContestRank(AbstractContestRank):
     total_time = models.IntegerField(default=0)
     # {"23": {"is_ac": True, "ac_time": 8999, "error_number": 2, "is_first_ac": True}}
     # key is problem id
-    submission_info = JSONField(default=dict)
+    submission_info = models.JSONField(default=dict)
 
     class Meta:
         db_table = "acm_contest_rank"
@@ -81,7 +81,7 @@ class OIContestRank(AbstractContestRank):
     total_score = models.IntegerField(default=0)
     # {"23": 333}
     # key is problem id, value is current score
-    submission_info = JSONField(default=dict)
+    submission_info = models.JSONField(default=dict)
 
     class Meta:
         db_table = "oi_contest_rank"
