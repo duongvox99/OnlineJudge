@@ -1,4 +1,7 @@
 from django.urls import path, include
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
+
+from oj.dev_settings import DEBUG
 
 urlpatterns = [
     path("api/", include("account.urls.oj")),
@@ -15,3 +18,13 @@ urlpatterns = [
     path("api/admin/", include("submission.urls.admin")),
     path("api/admin/", include("utils.urls")),
 ]
+
+
+if DEBUG:
+    # API DOCUMENT URLS
+    show_url_patterns = [url_pattern for url_pattern in urlpatterns]
+    urlpatterns += [
+        path('api/schema/', SpectacularAPIView.as_view(urlconf=show_url_patterns), name="schema"),
+        path('docs/', SpectacularSwaggerView.as_view(url_name="schema"), name='swagger'),
+        path('redoc/', SpectacularRedocView.as_view(url_name="schema"), name='redoc')
+    ]

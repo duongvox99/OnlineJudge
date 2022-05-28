@@ -13,6 +13,7 @@ import os
 import raven
 from copy import deepcopy
 from utils.shortcuts import get_env
+from django.utils.translation import gettext_lazy as _
 
 production_env = get_env("OJ_ENV", "dev") == "production"
 if production_env:
@@ -36,6 +37,7 @@ VENDOR_APPS = [
     'django_dramatiq',
     'django_dbconn_retry',
     'corsheaders',
+    'drf_spectacular',
 ]
 
 if production_env:
@@ -190,7 +192,8 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.JSONRenderer',
-    )
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
@@ -254,3 +257,18 @@ RAVEN_CONFIG = {
 }
 
 IP_HEADER = "HTTP_X_REAL_IP"
+
+
+# API documentation
+# -----------------------------------------------------------------------------
+# https://drf-spectacular.readthedocs.io/en/latest/settings.html
+SPECTACULAR_SETTINGS = {
+    "TITLE": _("API"),
+    "DESCRIPTION": _("Documentation for apis"),
+    "VERSION": "",
+    "SWAGGER_UI_SETTINGS": {
+        "deepLinking": True,
+        "displayOperationId": True,
+    },
+    'COMPONENT_SPLIT_REQUEST': True  # chuyển FileField về dạng chọn file binary
+}
