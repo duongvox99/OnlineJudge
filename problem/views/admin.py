@@ -9,25 +9,28 @@ from wsgiref.util import FileWrapper
 from django.conf import settings
 from django.db import transaction
 from django.db.models import Q
-from django.http import StreamingHttpResponse, FileResponse
+from django.http import FileResponse, StreamingHttpResponse
 
-from account.decorators import problem_permission_required, ensure_created_by
+from account.decorators import ensure_created_by, problem_permission_required
 from contest.models import Contest, ContestStatus
 from fps.parser import FPSHelper, FPSParser
 from judge.dispatcher import SPJCompiler
 from options.options import SysOptions
-from submission.models import Submission, JudgeStatus
-from utils.api import APIView, CSRFExemptAPIView, validate_serializer, APIError
+from submission.models import JudgeStatus, Submission
+from utils.api import APIError, APIView, CSRFExemptAPIView, validate_serializer
 from utils.constants import Difficulty
-from utils.shortcuts import rand_str, natural_sort_key
+from utils.shortcuts import natural_sort_key, rand_str
 from utils.tasks import delete_files
+
 from ..models import Problem, ProblemRuleType, ProblemTag
-from ..serializers import (CreateContestProblemSerializer, CompileSPJSerializer,
-                           CreateProblemSerializer, EditProblemSerializer, EditContestProblemSerializer,
-                           ProblemAdminSerializer, TestCaseUploadForm, ContestProblemMakePublicSerializer,
-                           AddContestProblemSerializer, ExportProblemSerializer,
-                           ExportProblemRequestSerialzier, UploadProblemForm, ImportProblemSerializer,
-                           FPSProblemSerializer)
+from ..serializers import (
+    AddContestProblemSerializer, CompileSPJSerializer,
+    ContestProblemMakePublicSerializer, CreateContestProblemSerializer,
+    CreateProblemSerializer, EditContestProblemSerializer,
+    EditProblemSerializer, ExportProblemRequestSerialzier,
+    ExportProblemSerializer, FPSProblemSerializer, ImportProblemSerializer,
+    ProblemAdminSerializer, TestCaseUploadForm, UploadProblemForm
+)
 from ..utils import TEMPLATE_BASE, build_problem_template
 
 
@@ -542,7 +545,7 @@ class ExportProblemAPI(APIView):
         delete_files.send_with_options(args=(path,), delay=300_000)
         resp = FileResponse(open(path, "rb"))
         resp["Content-Type"] = "application/zip"
-        resp["Content-Disposition"] = f"attachment;filename=problem-export.zip"
+        resp["Content-Disposition"] = "attachment;filename=problem-export.zip"
         return resp
 
 

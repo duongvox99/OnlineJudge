@@ -1,6 +1,9 @@
 from django.urls import path
 
-from ..views.oj import SubmissionAPI, SubmissionListAPI, ContestSubmissionListAPI, SubmissionExistsAPI
+from ..views.oj import (
+    ContestSubmissionListAPI, SubmissionAPI, SubmissionExistsAPI,
+    SubmissionListAPI
+)
 
 urlpatterns = [
     path("submission/", SubmissionAPI.as_view(), name="submission_api"),

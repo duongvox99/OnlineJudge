@@ -1,5 +1,5 @@
 [flake8]
-exclude = 
+exclude =
   xss_filter.py,
   */migrations/,
   *settings.py

@@ -6,6 +6,7 @@ from django.utils import timezone
 
 from options.options import SysOptions
 from utils.api.tests import APITestCase
+
 from .models import JudgeServer
 
 

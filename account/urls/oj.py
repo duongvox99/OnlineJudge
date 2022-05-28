@@ -1,13 +1,14 @@
 from django.urls import path
 
-from ..views.oj import (ApplyResetPasswordAPI, ResetPasswordAPI,
-                        UserChangePasswordAPI, UserRegisterAPI, UserChangeEmailAPI,
-                        UserLoginAPI, UserLogoutAPI, UsernameOrEmailCheck,
-                        AvatarUploadAPI, TwoFactorAuthAPI, UserProfileAPI,
-                        UserRankAPI, CheckTFARequiredAPI, SessionManagementAPI,
-                        ProfileProblemDisplayIDRefreshAPI, OpenAPIAppkeyAPI, SSOAPI)
-
 from utils.captcha.views import CaptchaAPIView
+
+from ..views.oj import (
+    SSOAPI, ApplyResetPasswordAPI, AvatarUploadAPI, CheckTFARequiredAPI,
+    OpenAPIAppkeyAPI, ProfileProblemDisplayIDRefreshAPI, ResetPasswordAPI,
+    SessionManagementAPI, TwoFactorAuthAPI, UserChangeEmailAPI,
+    UserChangePasswordAPI, UserLoginAPI, UserLogoutAPI, UsernameOrEmailCheck,
+    UserProfileAPI, UserRankAPI, UserRegisterAPI
+)
 
 urlpatterns = [
     path("login/", UserLoginAPI.as_view(), name="user_login_api"),

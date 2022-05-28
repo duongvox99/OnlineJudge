@@ -1,9 +1,10 @@
 from account.decorators import super_admin_required
-from utils.api import APIView, validate_serializer
-
 from announcement.models import Announcement
-from announcement.serializers import (AnnouncementSerializer, CreateAnnouncementSerializer,
-                                      EditAnnouncementSerializer)
+from announcement.serializers import (
+    AnnouncementSerializer, CreateAnnouncementSerializer,
+    EditAnnouncementSerializer
+)
+from utils.api import APIView, validate_serializer
 
 
 class AnnouncementAdminAPI(APIView):

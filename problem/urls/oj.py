@@ -1,6 +1,6 @@
 from django.urls import path
 
-from ..views.oj import ProblemTagAPI, ProblemAPI, ContestProblemAPI, PickOneAPI
+from ..views.oj import ContestProblemAPI, PickOneAPI, ProblemAPI, ProblemTagAPI
 
 urlpatterns = [
     path("problem/tags/", ProblemTagAPI.as_view(), name="problem_tag_list_api"),

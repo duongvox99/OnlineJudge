@@ -1,10 +1,9 @@
-from utils.constants import ContestRuleType  # noqa
 from django.db import models
 from django.utils.timezone import now
 
-
-from utils.constants import ContestStatus, ContestType
 from account.models import User
+from utils.constants import ContestRuleType  # noqa
+from utils.constants import ContestStatus, ContestType
 from utils.models import RichTextField
 
 
@@ -45,10 +44,7 @@ class Contest(models.Model):
 
     # 是否有权查看problem 的一些统计信息 诸如submission_number, accepted_number 等
     def problem_details_permission(self, user):
-        return self.rule_type == ContestRuleType.ACM or \
-               self.status == ContestStatus.CONTEST_ENDED or \
-               user.is_authenticated and user.is_contest_admin(self) or \
-               self.real_time_rank
+        return self.rule_type == ContestRuleType.ACM or self.status == ContestStatus.CONTEST_ENDED or user.is_authenticated and user.is_contest_admin(self) or self.real_time_rank
 
     class Meta:
         db_table = "contest"

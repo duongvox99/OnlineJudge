@@ -12,7 +12,7 @@ services:
       - RSYNC_PASSWORD=CHANGE_THIS_PASSWORD
     ports:
       - "0.0.0.0:873:873"
-    
+
   oj-rsync-slave:
     image: oj-rsync
     volumes:

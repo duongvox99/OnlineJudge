@@ -1,11 +1,11 @@
 import os
 import re
-import xlsxwriter
 
-from django.db import transaction, IntegrityError
+import xlsxwriter
+from django.contrib.auth.hashers import make_password
+from django.db import IntegrityError, transaction
 from django.db.models import Q
 from django.http import HttpResponse
-from django.contrib.auth.hashers import make_password
 
 from submission.models import Submission
 from utils.api import APIView, validate_serializer
@@ -13,8 +13,10 @@ from utils.shortcuts import rand_str
 
 from ..decorators import super_admin_required
 from ..models import AdminType, ProblemPermission, User, UserProfile
-from ..serializers import EditUserSerializer, UserAdminSerializer, GenerateUserSerializer
-from ..serializers import ImportUserSeralizer
+from ..serializers import (
+    EditUserSerializer, GenerateUserSerializer, ImportUserSeralizer,
+    UserAdminSerializer
+)
 
 
 class UserAdminAPI(APIView):
@@ -116,9 +118,7 @@ class UserAdminAPI(APIView):
 
         keyword = request.GET.get("keyword", None)
         if keyword:
-            user = user.filter(Q(username__icontains=keyword) |
-                               Q(userprofile__real_name__icontains=keyword) |
-                               Q(email__icontains=keyword))
+            user = user.filter(Q(username__icontains=keyword) | Q(userprofile__real_name__icontains=keyword) | Q(email__icontains=keyword))
         return self.success(self.paginate_data(request, user, UserAdminSerializer))
 
     @super_admin_required
@@ -151,7 +151,7 @@ class GenerateUserAPI(APIView):
             raw_data = f.read()
         os.remove(file_path)
         response = HttpResponse(raw_data)
-        response["Content-Disposition"] = f"attachment; filename=users.xlsx"
+        response["Content-Disposition"] = "attachment; filename=users.xlsx"
         response["Content-Type"] = "application/xlsx"
         return response
 

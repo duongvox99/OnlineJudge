@@ -8,23 +8,26 @@ from django.contrib import auth
 from django.template.loader import render_to_string
 from django.utils.decorators import method_decorator
 from django.utils.timezone import now
-from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
+from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from otpauth import OtpAuth
 
-from problem.models import Problem
-from utils.constants import ContestRuleType
 from options.options import SysOptions
-from utils.api import APIView, validate_serializer, CSRFExemptAPIView
+from problem.models import Problem
+from utils.api import APIView, CSRFExemptAPIView, validate_serializer
 from utils.captcha import Captcha
-from utils.shortcuts import rand_str, img2base64, datetime2str
+from utils.constants import ContestRuleType
+from utils.shortcuts import datetime2str, img2base64, rand_str
+
 from ..decorators import login_required
-from ..models import User, UserProfile, AdminType
-from ..serializers import (ApplyResetPasswordSerializer, ResetPasswordSerializer,
-                           UserChangePasswordSerializer, UserLoginSerializer,
-                           UserRegisterSerializer, UsernameOrEmailCheckSerializer,
-                           RankInfoSerializer, UserChangeEmailSerializer, SSOSerializer)
-from ..serializers import (TwoFactorAuthCodeSerializer, UserProfileSerializer,
-                           EditUserProfileSerializer, ImageUploadForm)
+from ..models import AdminType, User, UserProfile
+from ..serializers import (
+    ApplyResetPasswordSerializer, EditUserProfileSerializer, ImageUploadForm,
+    RankInfoSerializer, ResetPasswordSerializer, SSOSerializer,
+    TwoFactorAuthCodeSerializer, UserChangeEmailSerializer,
+    UserChangePasswordSerializer, UserLoginSerializer,
+    UsernameOrEmailCheckSerializer, UserProfileSerializer,
+    UserRegisterSerializer
+)
 from ..tasks import send_email_async
 
 
@@ -305,7 +308,7 @@ class ApplyResetPasswordAPI(APIView):
         send_email_async.send(from_name=SysOptions.website_name_shortcut,
                               to_email=user.email,
                               to_name=user.username,
-                              subject=f"Reset your password",
+                              subject="Reset your password",
                               content=email_html)
         return self.success("Succeeded")
 

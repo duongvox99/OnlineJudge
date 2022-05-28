@@ -1,18 +1,22 @@
 # flake8: noqa
-import os
-import sys
-import re
-import json
-import django
 import hashlib
+import json
+import os
+import re
+import sys
 from json.decoder import JSONDecodeError
+
+import django
 
 sys.path.append("../")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "oj.settings")
 django.setup()
 from django.conf import settings
-from account.models import User, UserProfile, AdminType, ProblemPermission
-from problem.models import Problem, ProblemTag, ProblemDifficulty, ProblemRuleType
+
+from account.models import AdminType, ProblemPermission, User, UserProfile
+from problem.models import (
+    Problem, ProblemDifficulty, ProblemRuleType, ProblemTag
+)
 
 admin_type_map = {
     0: AdminType.REGULAR_USER,

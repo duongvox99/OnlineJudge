@@ -1,19 +1,18 @@
 import time
-
-from unittest import mock
-from datetime import timedelta
 from copy import deepcopy
+from datetime import timedelta
+from unittest import mock
 
 from django.contrib import auth
 from django.utils.timezone import now
 from otpauth import OtpAuth
 
-from utils.api.tests import APIClient, APITestCase
-from utils.shortcuts import rand_str
 from options.options import SysOptions
+from utils.api.tests import APIClient, APITestCase
+from utils.constants import ContestRuleType
+from utils.shortcuts import rand_str
 
 from .models import AdminType, ProblemPermission, User
-from utils.constants import ContestRuleType
 
 
 class PermissionDecoratorTest(APITestCase):

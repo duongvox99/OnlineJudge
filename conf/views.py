@@ -21,13 +21,16 @@ from options.options import SysOptions
 from problem.models import Problem
 from submission.models import Submission
 from utils.api import APIView, CSRFExemptAPIView, validate_serializer
-from utils.shortcuts import send_email, get_env
+from utils.shortcuts import get_env, send_email
 from utils.xss_filter import XSSHtml
+
 from .models import JudgeServer
-from .serializers import (CreateEditWebsiteConfigSerializer,
-                          CreateSMTPConfigSerializer, EditSMTPConfigSerializer,
-                          JudgeServerHeartbeatSerializer,
-                          JudgeServerSerializer, TestSMTPConfigSerializer, EditJudgeServerSerializer)
+from .serializers import (
+    CreateEditWebsiteConfigSerializer, CreateSMTPConfigSerializer,
+    EditJudgeServerSerializer, EditSMTPConfigSerializer,
+    JudgeServerHeartbeatSerializer, JudgeServerSerializer,
+    TestSMTPConfigSerializer
+)
 
 
 class SMTPAPI(APIView):

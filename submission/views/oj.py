@@ -1,7 +1,7 @@
 import ipaddress
 
-from account.decorators import login_required, check_contest_permission
-from contest.models import ContestStatus, ContestRuleType
+from account.decorators import check_contest_permission, login_required
+from contest.models import ContestRuleType, ContestStatus
 from judge.tasks import judge_task
 from options.options import SysOptions
 # from judge.dispatcher import JudgeDispatcher
@@ -10,10 +10,13 @@ from utils.api import APIView, validate_serializer
 from utils.cache import cache
 from utils.captcha import Captcha
 from utils.throttling import TokenBucket
+
 from ..models import Submission
-from ..serializers import (CreateSubmissionSerializer, SubmissionModelSerializer,
-                           ShareSubmissionSerializer)
-from ..serializers import SubmissionSafeModelSerializer, SubmissionListSerializer
+from ..serializers import (
+    CreateSubmissionSerializer, ShareSubmissionSerializer,
+    SubmissionListSerializer, SubmissionModelSerializer,
+    SubmissionSafeModelSerializer
+)
 
 
 class SubmissionAPI(APIView):
@@ -198,6 +201,4 @@ class SubmissionExistsAPI(APIView):
     def get(self, request):
         if not request.GET.get("problem_id"):
             return self.error("Parameter error, problem_id is required")
-        return self.success(request.user.is_authenticated and
-                            Submission.objects.filter(problem_id=request.GET["problem_id"],
-                                                      user_id=request.user.id).exists())
+        return self.success(request.user.is_authenticated and Submission.objects.filter(problem_id=request.GET["problem_id"], user_id=request.user.id).exists())

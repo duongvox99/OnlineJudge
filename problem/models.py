@@ -1,10 +1,9 @@
 from django.db import models
 
-
 from account.models import User
 from contest.models import Contest
-from utils.models import RichTextField
 from utils.constants import Choices
+from utils.models import RichTextField
 
 
 class ProblemTag(models.Model):

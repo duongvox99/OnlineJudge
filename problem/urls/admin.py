@@ -1,8 +1,10 @@
 from django.urls import path
 
-from ..views.admin import (ContestProblemAPI, ProblemAPI, TestCaseAPI, MakeContestProblemPublicAPIView,
-                           CompileSPJAPI, AddContestProblemAPI, ExportProblemAPI, ImportProblemAPI,
-                           FPSProblemImport)
+from ..views.admin import (
+    AddContestProblemAPI, CompileSPJAPI, ContestProblemAPI, ExportProblemAPI,
+    FPSProblemImport, ImportProblemAPI, MakeContestProblemPublicAPIView,
+    ProblemAPI, TestCaseAPI
+)
 
 urlpatterns = [
     path("test_case/", TestCaseAPI.as_view(), name="test_case_api"),

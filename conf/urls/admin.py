@@ -1,7 +1,9 @@
 from django.urls import path
 
-from ..views import SMTPAPI, JudgeServerAPI, WebsiteConfigAPI, TestCasePruneAPI, SMTPTestAPI
-from ..views import ReleaseNotesAPI, DashboardInfoAPI
+from ..views import (
+    SMTPAPI, DashboardInfoAPI, JudgeServerAPI, ReleaseNotesAPI, SMTPTestAPI,
+    TestCasePruneAPI, WebsiteConfigAPI
+)
 
 urlpatterns = [
     path("smtp/", SMTPAPI.as_view(), name="smtp_admin_api"),

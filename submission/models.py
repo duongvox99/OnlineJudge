@@ -1,10 +1,8 @@
 from django.db import models
 
-from utils.constants import ContestStatus
-
-from problem.models import Problem
 from contest.models import Contest
-
+from problem.models import Problem
+from utils.constants import ContestStatus
 from utils.shortcuts import rand_str
 
 

@@ -3,6 +3,7 @@ from unittest import mock
 
 from problem.models import Problem, ProblemTag
 from utils.api.tests import APITestCase
+
 from .models import Submission
 
 DEFAULT_PROBLEM_DATA = {"_id": "A-110", "title": "test", "description": "<p>test</p>", "input_description": "test",

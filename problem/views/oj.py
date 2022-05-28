@@ -1,10 +1,15 @@
 import random
-from django.db.models import Q, Count
-from utils.api import APIView
+
+from django.db.models import Count, Q
+
 from account.decorators import check_contest_permission
-from ..models import ProblemTag, Problem, ProblemRuleType
-from ..serializers import ProblemSerializer, TagSerializer, ProblemSafeSerializer
 from contest.models import ContestRuleType
+from utils.api import APIView
+
+from ..models import Problem, ProblemRuleType, ProblemTag
+from ..serializers import (
+    ProblemSafeSerializer, ProblemSerializer, TagSerializer
+)
 
 
 class ProblemTagAPI(APIView):

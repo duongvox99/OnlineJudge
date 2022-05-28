@@ -1,5 +1,5 @@
-from django.urls import reverse
 from django.test.testcases import TestCase
+from django.urls import reverse
 from rest_framework.test import APIClient
 
 from account.models import AdminType, ProblemPermission, User, UserProfile

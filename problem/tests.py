@@ -7,15 +7,13 @@ from zipfile import ZipFile
 
 from django.conf import settings
 
-from utils.api.tests import APITestCase
-
-from .models import ProblemTag, ProblemIOMode
-from .models import Problem, ProblemRuleType
 from contest.models import Contest
 from contest.tests import DEFAULT_CONTEST_DATA
+from utils.api.tests import APITestCase
 
-from .views.admin import TestCaseAPI
+from .models import Problem, ProblemIOMode, ProblemRuleType, ProblemTag
 from .utils import parse_problem_template
+from .views.admin import TestCaseAPI
 
 DEFAULT_PROBLEM_DATA = {"_id": "A-110", "title": "test", "description": "<p>test</p>", "input_description": "test",
                         "output_description": "test", "time_limit": 1000, "memory_limit": 256, "difficulty": "Low",

@@ -1,6 +1,7 @@
-from .models import Submission
 from utils.api import serializers
 from utils.serializers import LanguageNameChoiceField
+
+from .models import Submission
 
 
 class CreateSubmissionSerializer(serializers.Serializer):

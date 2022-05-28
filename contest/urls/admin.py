@@ -1,6 +1,9 @@
 from django.urls import path
 
-from ..views.admin import ContestAnnouncementAPI, ContestAPI, ACMContestHelper, DownloadContestSubmissions
+from ..views.admin import (
+    ACMContestHelper, ContestAnnouncementAPI, ContestAPI,
+    DownloadContestSubmissions
+)
 
 urlpatterns = [
     path("contest/", ContestAPI.as_view(), name="contest_admin_api"),

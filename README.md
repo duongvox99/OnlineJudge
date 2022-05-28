@@ -60,7 +60,7 @@ You can control the menu and chart status in rankings.
 
 ![user-home](https://user-images.githubusercontent.com/20637881/33365521-7842d808-d523-11e7-84c1-2e2aa0079f32.png)
 
-### Admin: 
+### Admin:
 
 ![admin-users](https://user-images.githubusercontent.com/20637881/33372516-42c34fda-d539-11e7-9f4e-5109477f83be.png)
 

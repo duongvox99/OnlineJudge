@@ -1,6 +1,6 @@
 from django.urls import path
 
-from ..views.admin import UserAdminAPI, GenerateUserAPI
+from ..views.admin import GenerateUserAPI, UserAdminAPI
 
 urlpatterns = [
     path("user/", UserAdminAPI.as_view(), name="user_admin_api"),
